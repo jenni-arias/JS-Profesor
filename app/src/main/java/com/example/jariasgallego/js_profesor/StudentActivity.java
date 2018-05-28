@@ -1,5 +1,6 @@
 package com.example.jariasgallego.js_profesor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,8 +43,13 @@ public class StudentActivity extends AppCompatActivity {
         lst_students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected =((Student)parent.getItemAtPosition(position)).getName();
-                Toast.makeText(StudentActivity.this, selected + " seleccionado.", Toast.LENGTH_SHORT).show();
+                String student_name =((Student)parent.getItemAtPosition(position)).getName();
+                Toast.makeText(StudentActivity.this, student_name + " seleccionado.",
+                        Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(StudentActivity.this, StatisticsActivity.class);
+                intent.putExtra("Estudiante", student_name);
+                startActivity(intent);
             }
         });
     }
