@@ -1,4 +1,4 @@
-package com.example.jariasgallego.js_profesor;
+package arias.jenifer.js_profesor;
 
 import org.junit.Test;
 

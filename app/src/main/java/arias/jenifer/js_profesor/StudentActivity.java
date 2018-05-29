@@ -1,4 +1,4 @@
-package com.example.jariasgallego.js_profesor;
+package arias.jenifer.js_profesor;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class StudentActivity extends AppCompatActivity {
 
     private ListView lst_students;
-    private TextView tv_name;
+  //  private TextView tv_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         lst_students = (ListView)findViewById(R.id.lst_students);
-        tv_name = (TextView) findViewById(R.id.tv_name);
+       // tv_name = (TextView) findViewById(R.id.tv_name);
 
         //Datos ejemplo
         final Student[] datos = new Student[] {

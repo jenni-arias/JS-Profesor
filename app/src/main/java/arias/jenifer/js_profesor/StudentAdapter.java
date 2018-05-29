@@ -1,4 +1,4 @@
-package com.example.jariasgallego.js_profesor;
+package arias.jenifer.js_profesor;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -29,6 +29,6 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_name.setText(datos[position].getName());
 
-        return(view);
+        return view;
     }
 }

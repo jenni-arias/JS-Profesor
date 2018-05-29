@@ -1,4 +1,4 @@
-package com.example.jariasgallego.js_profesor;
+package arias.jenifer.js_profesor;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.jariasgallego.js_profesor", appContext.getPackageName());
+        assertEquals("arias.jenifer.js_profesor", appContext.getPackageName());
     }
 }
