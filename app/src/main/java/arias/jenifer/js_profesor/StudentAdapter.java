@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class StudentAdapter extends ArrayAdapter<Student> {
 
     private Context context;
-    private Student[] datos;
+    private ArrayList<Student> datos;
 
-    public StudentAdapter(Context context, Student[] datos) {
+    public StudentAdapter(Context context, ArrayList<Student> datos) {
         super(context, R.layout.student_item, datos);
         this.context = context;
         this.datos = datos;
@@ -27,7 +29,7 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         }
 
         TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
-        tv_name.setText(datos[position].getName());
+        tv_name.setText(datos.get(position).getName());
 
         return view;
     }
