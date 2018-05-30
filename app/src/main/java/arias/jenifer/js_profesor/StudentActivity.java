@@ -1,6 +1,5 @@
 package arias.jenifer.js_profesor;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,7 +51,8 @@ public class StudentActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                datos.remove(dataSnapshot.getKey());
+                Student student = new Student(dataSnapshot.getKey());
+                datos.remove(student);
                 adaptador.notifyDataSetChanged();
             }
 
