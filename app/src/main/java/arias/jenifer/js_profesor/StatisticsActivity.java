@@ -30,7 +30,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private StatisticsAdapter adaptador;
     private ArrayList<String> datos = new ArrayList<>();
 
-    static final String FILENAME_CODE = "Data.txt";
+    static String FILENAME_CODE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,32 +44,39 @@ public class StatisticsActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("Estudiante");
         getSupportActionBar().setTitle(name);
 
-        /*
-        datos.add("Nivel 1. Fecha: 18/05/2018. Hora: 15:50h." + "\n"
-                + "Ejercicios bien: 0. Ejercicios mal: 0." + "\n"
-                + "Completado: NO");
-        datos.add("Nivel 1. Fecha: 18/05/2018. Hora: 15:50h." + "\n"
-                + "Ejercicios bien: 1. Ejercicios mal: 0." + "\n"
-                + "Completado: NO"); */
-
         dbFire = FirebaseDatabase.getInstance().getReference().child(name);
+        FILENAME_CODE = name + ".txt";
 
         dbFire.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(dataSnapshot != null) {
-                    Log.i("JENN1", dataSnapshot.getKey());
                     String level = dataSnapshot.getKey();
                     dbFire.child(level);
 
+                    String dato = readFile();
+                    if(!dato.isEmpty()) {
+                        dato = dato + "&"; }
+
+                    String fecha = dataSnapshot.child("Fecha").getValue().toString();
+                    String hora = dataSnapshot.child("Hora").getValue().toString();
+                    String ej_bien = dataSnapshot.child("Ejercicios bien").getValue().toString();
+                    String ej_mal = dataSnapshot.child("Ejercicios mal").getValue().toString();
                     String complete = dataSnapshot.child("Completado").getValue().toString();
 
-                    String data = "Nivel " + level + ". Fecha: 18/05/2018. Hora: 15:50h." + "\n"
-                            + "Ejercicios bien: 0. Ejercicios mal: 0." + "\n"
+                    String data = "Nivel " + level + ". Fecha: " + fecha + ". Hora: " + hora + "h." + "\n"
+                            + "Ejercicios bien: " + ej_bien + ". Ejercicios mal: "+ ej_mal + "." + "\n"
                             + "Completado: "+ complete;
 
-                    writeCode(data);
-                    datos.add(readCode());
+                    dato = dato.concat(data);
+                    writeFile(dato);
+                    String[] split = dato.split("&");
+
+                    for(int i = 0; i < split.length; i++) {
+                        if(!datos.contains(split[i])) {
+                            datos.add(split[i]);
+                        }
+                    }
                     adaptador.notifyDataSetChanged();
                 }
             }
@@ -99,8 +106,7 @@ public class StatisticsActivity extends AppCompatActivity {
         adaptador = new StatisticsAdapter(this, datos);
         lst_statistics = (ListView) findViewById(R.id.lst_statistics);
         lst_statistics.setAdapter(adaptador);
-
-        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -113,21 +119,21 @@ public class StatisticsActivity extends AppCompatActivity {
         }
     }
 
-    private void writeCode(String data){
+    private void writeFile(String dato){
         try {
             FileOutputStream fout = openFileOutput(FILENAME_CODE, Context.MODE_PRIVATE);
-            String line = String.valueOf(data);
+            String line = String.valueOf(dato);
             fout.write(line.getBytes());
             fout.close();
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "Fichero no encontrado", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(this, "No se puede escribir el fichero", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
 
     }
 
-    private String readCode(){
+    private String readFile(){
         String data = new String();
         try {
             FileInputStream fin = openFileInput(FILENAME_CODE);
@@ -138,9 +144,9 @@ public class StatisticsActivity extends AppCompatActivity {
                 fin.close();
             }
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "Fichero no encontrado", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(this, "No se puede leer el fichero", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
 
         return data;
