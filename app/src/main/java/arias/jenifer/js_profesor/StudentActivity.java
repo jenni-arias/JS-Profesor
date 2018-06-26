@@ -75,7 +75,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String student_name =((Student)parent.getItemAtPosition(position)).getName();
-                Toast.makeText(StudentActivity.this, student_name + " seleccionado.",
+                Toast.makeText(StudentActivity.this, student_name + getString(R.string.seleccionado),
                         Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(StudentActivity.this, StatisticsActivity.class);

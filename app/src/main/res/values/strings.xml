@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Juego Sumas - Control</string>
+    <string name="app_name">JS - Control</string>
+
+    <string name="fb_nivel">Nivel&#160;</string>
+    <string name="fb_fecha">.&#160;Fecha:&#160;</string>
+    <string name="fb_hora">.&#160;Hora:&#160;</string>
+    <string name="fb_ejBien">.&#160;Ejercicios bien:&#160;</string>
+    <string name="fb_ejMAl">.&#160;Ejercicios mal:&#160;</string>
+    <string name="fb_completado">.&#160;Completado:&#160;</string>
+
+    <string name="seleccionado">&#160;seleccionado.</string>
+
+
 </resources>

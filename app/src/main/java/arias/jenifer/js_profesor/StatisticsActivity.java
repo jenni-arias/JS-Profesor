@@ -52,6 +52,7 @@ public class StatisticsActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(dataSnapshot != null) {
                     String level = dataSnapshot.getKey();
+                    String data = null;
                     dbFire.child(level);
 
                     String dato = readFile();
@@ -64,20 +65,23 @@ public class StatisticsActivity extends AppCompatActivity {
                     String ej_mal = dataSnapshot.child("Ejercicios mal").getValue().toString();
                     String complete = dataSnapshot.child("Completado").getValue().toString();
 
-                    String data = "Nivel " + level + ". Fecha: " + fecha + ". Hora: " + hora + "h." + "\n"
-                            + "Ejercicios bien: " + ej_bien + ". Ejercicios mal: "+ ej_mal + "." + "\n"
-                            + "Completado: "+ complete;
+                    if(!fecha.equals("00-00-0000")) {
+                        data = String.format(getString(R.string.fb_nivel) + level + "\n"
+                                + getString(R.string.fb_fecha) + fecha + getString(R.string.fb_hora) + hora + "h." + "\n"
+                                + getString(R.string.fb_ejBien) + ej_bien + getString(R.string.fb_ejMAl) + ej_mal + "." + "\n"
+                                + getString(R.string.fb_completado) + complete);
 
-                    dato = dato.concat(data);
-                    writeFile(dato);
-                    String[] split = dato.split("&");
+                        dato = dato.concat(data);
+                        writeFile(dato);
+                        String[] split = dato.split("&");
 
-                    for(int i = 0; i < split.length; i++) {
-                        if(!datos.contains(split[i])) {
-                            datos.add(split[i]);
+                        for(int i = 0; i < split.length; i++) {
+                            if(!datos.contains(split[i])) {
+                                datos.add(split[i]);
+                            }
                         }
+                        adaptador.notifyDataSetChanged();
                     }
-                    adaptador.notifyDataSetChanged();
                 }
             }
 
@@ -88,6 +92,8 @@ public class StatisticsActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                dbFire.removeValue();
+                adaptador.notifyDataSetChanged();
 
             }
 

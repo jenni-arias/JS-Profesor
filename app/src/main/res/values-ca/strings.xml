@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JS - Control</string>
+
+    <string name="fb_nivel">Nivell&#160;</string>
+    <string name="fb_fecha">.&#160;Data:&#160;</string>
+    <string name="fb_hora">.&#160;Hora:&#160;</string>
+    <string name="fb_ejBien">.&#160;Exercicis bé:&#160;</string>
+    <string name="fb_ejMAl">.&#160;Exercicis malament:&#160;</string>
+    <string name="fb_completado">.&#160;Completat:&#160;</string>
+
+    <string name="seleccionado">&#160;seleccionat.</string>
+</resources>
